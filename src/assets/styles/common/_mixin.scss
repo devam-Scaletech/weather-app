@@ -59,3 +59,7 @@
 		}
 	}
 }
+
+@mixin borderRadius($value) {
+	border-radius: $value;
+}

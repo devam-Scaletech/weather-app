@@ -1,5 +1,13 @@
-body {
-	margin: 0;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
+@import 'fonts';
+@import '_variable';
+@import 'animate.min.css';
+
+@import 'common/mixin';
+@import 'common/extend';
+@import 'common/function';
+@import 'common/common';
+@import 'common/form';
+@import 'common/model';
+
+@import '_base';
+@import 'responsive';
