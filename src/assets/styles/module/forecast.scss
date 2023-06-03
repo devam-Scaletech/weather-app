@@ -1,6 +1,11 @@
 @import '../_variable';
 
+.background__weather {
+	height: 745px;
+	object-fit: cover;
+}
 .forecast__container {
 	background-color: $white;
 	box-shadow: rgba(120, 120, 130, 0.2) 0px 7px 29px 0px;
+	border-radius: 10% 0px 0px 10%;
 }

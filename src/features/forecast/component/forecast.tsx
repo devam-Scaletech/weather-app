@@ -1,7 +1,12 @@
+import ForecastDetails from './forecastDetails';
 import ForecastHeader from './forecastHeader';
-import 'assets/styles/module/forecast.scss';
 const Forecast = () => {
-	return <ForecastHeader />;
+	return (
+		<div className='flex position--relative'>
+			<ForecastHeader />
+			<ForecastDetails />
+		</div>
+	);
 };
 
 export default Forecast;
