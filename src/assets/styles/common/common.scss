@@ -181,7 +181,9 @@
 .height--60 {
 	height: 60%;
 }
-
+.height--2px {
+	height: 2px;
+}
 .height--15px {
 	height: 15px;
 }
@@ -301,6 +303,12 @@
 
 .m--20 {
 	@include margin(20px);
+}
+.m--25 {
+	@include margin(25px);
+}
+.m--35 {
+	@include margin(35px);
 }
 
 .mt--0 {
@@ -835,7 +843,9 @@
 .font-size--50 {
 	font-size: 3.125rem;
 }
-
+.font-size--128 {
+	font-size: 8rem;
+}
 .line-height--sm {
 	line-height: $line-height-sm;
 }
@@ -1144,14 +1154,9 @@
 	}
 }
 
-.text--grey {
-	@include getShadesColorClasses($grey, 'color');
-}
-
 .text--red {
 	@include getShadesColorClasses($red, 'color');
 }
-
 .text--success {
 	@include getShadesColorClasses($success, 'color');
 }
@@ -1163,7 +1168,9 @@
 .text--black {
 	color: $black;
 }
-
+.text--grey {
+	color: getColor($grey, 100);
+}
 .bg--grey {
 	@include getShadesColorClasses($grey, 'background-color');
 }

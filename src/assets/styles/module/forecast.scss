@@ -6,6 +6,23 @@
 }
 .forecast__container {
 	background-color: $white;
+	background-image: url('../../image/unsplash_RwVqa6ST69E.png');
+	height: 500px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 	box-shadow: rgba(120, 120, 130, 0.2) 0px 7px 29px 0px;
-	border-radius: 10% 0px 0px 10%;
+}
+
+.break__line {
+	background-color: #dedede;
+	width: 420px;
+	height: 2px;
+	margin: 0 auto;
+	border-radius: 25px;
+}
+
+.horizontal_break__line {
+	border-left: 2px solid #dedede;
+	height: 200px;
 }

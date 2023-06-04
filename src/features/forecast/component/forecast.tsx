@@ -5,9 +5,9 @@ import ForecastDetails from './forecastDetails';
 import ForecastHeader from './forecastHeader';
 
 const Forecast = () => {
-	const [lat, setLat] = useState();
-	const [long, setLong] = useState();
-	const [weatherData, setWeatherData] = useState();
+	const [lat, setLat] = useState(0);
+	const [long, setLong] = useState(0);
+	const [weatherData, setWeatherData] = useState<Record<string, any>>({});
 	const [isLoading, setIsLoading] = useState(false);
 	const API_key = process.env.REACT_APP_API_KEY;
 
@@ -20,20 +20,21 @@ const Forecast = () => {
 
 	const getWeatherData = useCallback(() => {
 		setIsLoading(true);
-		httpService
-			.get(
-				`${'https://api.openweathermap.org/data/2.5'}/${
-					API_CONFIG.path.weather
-				}?lat=${lat}&lon=${long}&units=metric&APPID=${API_key}`
-			)
-			.then((response) => {
-				setWeatherData(response);
-				setIsLoading(false);
-			})
-			.catch((error) => {
-				setIsLoading(false);
-				console.error('error', error);
-			});
+		(lat && long) > 0 &&
+			httpService
+				.get(
+					`${'https://api.openweathermap.org/data/2.5'}/${
+						API_CONFIG.path.weather
+					}?lat=${lat}&lon=${long}&units=metric&APPID=${API_key}`
+				)
+				.then((response) => {
+					setWeatherData(response);
+					setIsLoading(false);
+				})
+				.catch((error) => {
+					setIsLoading(false);
+					console.error('error', error);
+				});
 	}, [lat, long]);
 
 	useEffect(() => {
@@ -43,8 +44,8 @@ const Forecast = () => {
 
 	return (
 		<div className='flex position--relative'>
-			<ForecastHeader />
-			<ForecastDetails />
+			<ForecastHeader weatherData={weatherData} />
+			<ForecastDetails weatherData={weatherData} isLoading={isLoading} />
 		</div>
 	);
 };
