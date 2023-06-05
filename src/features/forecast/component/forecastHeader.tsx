@@ -1,12 +1,10 @@
-import { SearchIcon } from 'shared/components/icons/icons';
-import hazeWeather from '../../../assets/weatherVideo/hazeWeather.mp4';
-import { weatherConditionMapper, weatherSafetyMapper } from 'shared/constants/constant';
 import { isEmpty } from 'lodash';
+import { SearchIcon } from 'shared/components/icons/icons';
+import { weatherConditionMapper, weatherSafetyMapper } from 'shared/constants/constant';
+import { IForecast } from '../interface/interface';
+import hazeWeather from '../../../assets/weatherVideo/hazeWeather.mp4';
 
-interface IForecastHeader {
-	weatherData: Record<string, any>;
-}
-const ForecastHeader: React.FC<IForecastHeader> = ({ weatherData }) => {
+const ForecastHeader: React.FC<IForecast> = ({ weatherData }) => {
 	return (
 		<div className='width--70 '>
 			<video

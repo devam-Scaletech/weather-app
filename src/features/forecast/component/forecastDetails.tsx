@@ -1,7 +1,6 @@
-import 'assets/styles/module/forecast.scss';
 import React from 'react';
+import isEmpty from 'lodash/isEmpty';
 import Spinner from 'shared/components/spinner/spinner';
-
 import {
 	ThunderStormIcon,
 	DrizzleIcon,
@@ -16,15 +15,15 @@ import {
 	SquallIcon,
 	TornadoIcon,
 	ClearSkyIcon,
-	CloudIcon
+	CloudIcon,
+	CompassIcon,
+	PressureIcon
 } from 'shared/components/icons/icons';
-import isEmpty from 'lodash/isEmpty';
-import { IWeatherIcon } from '../interface/interface';
-interface IForecastDetails {
-	weatherData: Record<string, any>;
-	isLoading: boolean;
-}
-const ForecastDetails: React.FC<IForecastDetails> = (props) => {
+
+import { IForecast, IWeatherIcon } from '../interface/interface';
+import 'assets/styles/module/forecast.scss';
+
+const ForecastDetails: React.FC<IForecast> = (props) => {
 	const { weatherData, isLoading } = props;
 	const metersToKilometers = (meters: number) => {
 		return meters / 1000;
@@ -64,22 +63,22 @@ const ForecastDetails: React.FC<IForecastDetails> = (props) => {
 					<div className='break__line' />
 					<p className='m--25 pt--15 font--semi-bold font-size--24'>Weather Details</p>
 
-					<p className='m--25 flex justify-content--between'>
+					<p className='m--25 flex justify-content--between align-items--center'>
 						<span className='font--semi-bold mr--10'>Feels like</span>
 						{weatherData.main?.feels_like}&deg;C
 					</p>
 
-					<p className='m--25 flex justify-content--between'>
+					<p className='m--25 flex justify-content--between align-items--center'>
 						<span className='font--semi-bold mr--10'>Sunrise</span>
 						{new Date(weatherData.sys?.sunrise * 1000).toLocaleTimeString('en-IN')}
 					</p>
 
-					<p className='m--25 flex justify-content--between'>
+					<p className='m--25 flex justify-content--between align-items--center'>
 						<span className='font--semi-bold mr--10'>Sunset</span>
 						{new Date(weatherData.sys?.sunset * 1000).toLocaleTimeString('en-IN')}
 					</p>
 
-					<p className='m--25 flex justify-content--between'>
+					<p className='m--25 flex justify-content--between align-items--center'>
 						<span className='font--semi-bold mr--10'>Humidity</span>
 						{weatherData.main?.humidity} %
 					</p>
@@ -92,7 +91,13 @@ const ForecastDetails: React.FC<IForecastDetails> = (props) => {
 					<div className='break__line' />
 					<div className='flex justify-content--between m--10'>
 						<div className='m--25 flex  flex--column'>
-							<p className='font--semi-bold mr--10 font-size--22'>Wind</p>
+							<p className='font--semi-bold mr--10 font-size--22 flex align-items--center'>
+								Wind
+								{/* <span> */}
+								<CompassIcon width='50' height='50' />
+								{/* </span> */}
+							</p>
+
 							<h1 className='mt--30'>
 								{weatherData.wind?.speed}
 								<span className='ml--10 font--medium'>kph</span>
@@ -100,7 +105,10 @@ const ForecastDetails: React.FC<IForecastDetails> = (props) => {
 						</div>
 						<div className='horizontal_break__line mt--20' />
 						<div className='m--25 flex  flex--column'>
-							<p className='font--semi-bold mr--10 font-size--22'>Pressure</p>
+							<p className='font--semi-bold mr--10 font-size--22 flex align-items--center'>
+								Pressure
+								<PressureIcon width='50' height='50' />
+							</p>
 							<h1 className='mt--30'>
 								{weatherData.main?.pressure}
 								<span className='ml--10 font--medium'>hpa</span>
