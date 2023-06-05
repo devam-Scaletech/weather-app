@@ -9,8 +9,8 @@ interface IProps {
 
 export const SearchIcon: FC<IProps> = (props) => (
 	<svg
-		width={props.width || ''}
-		height={props.height || ''}
+		width={props.width || 150}
+		height={props.height || 150}
 		viewBox='0 0 20 20'
 		fill='none'
 		className={props.className || ''}
@@ -37,8 +37,8 @@ export const ClearSkyIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='150' x2='234' y1='119.2' y2='264.8' gradientUnits='userSpaceOnUse'>
@@ -85,8 +85,8 @@ export const CloudIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='99.5' x2='232.6' y1='30.7' y2='261.4' gradientUnits='userSpaceOnUse'>
@@ -122,8 +122,8 @@ export const CompassIcon: FC<IProps> = (props) => (
 		xmlns='http://www.w3.org/2000/svg'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='184' x2='328' y1='131.3' y2='380.7' gradientUnits='userSpaceOnUse'>
@@ -160,8 +160,8 @@ export const DrizzleIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='99.5' x2='232.6' y1='30.7' y2='261.4' gradientUnits='userSpaceOnUse'>
@@ -282,8 +282,8 @@ export const DustIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='138.5' x2='224.2' y1='5.1' y2='153.5' gradientUnits='userSpaceOnUse'>
@@ -406,8 +406,8 @@ export const FogIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='99.5' x2='232.6' y1='30.7' y2='261.4' gradientUnits='userSpaceOnUse'>
@@ -478,8 +478,8 @@ export const HumidityIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='14.8' x2='124.2' y1='42.3' y2='231.7' gradientUnits='userSpaceOnUse'>
@@ -522,8 +522,8 @@ export const MistIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='220' x2='292' y1='137.7' y2='262.4' gradientUnits='userSpaceOnUse'>
@@ -595,8 +595,8 @@ export const RainIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='99.5' x2='232.6' y1='30.7' y2='261.4' gradientUnits='userSpaceOnUse'>
@@ -733,8 +733,8 @@ export const SmokeIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='99.5' x2='232.6' y1='30.7' y2='261.4' gradientUnits='userSpaceOnUse'>
@@ -857,8 +857,8 @@ export const SnowIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='99.5' x2='232.6' y1='30.7' y2='261.4' gradientUnits='userSpaceOnUse'>
@@ -1001,8 +1001,8 @@ export const SunRiseIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='150' x2='234' y1='119.2' y2='264.8' gradientUnits='userSpaceOnUse'>
@@ -1062,8 +1062,8 @@ export const SunSetIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='150' x2='234' y1='119.2' y2='264.8' gradientUnits='userSpaceOnUse'>
@@ -1126,8 +1126,8 @@ export const TornadoIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='220' x2='292' y1='97.7' y2='222.3' gradientUnits='userSpaceOnUse'>
@@ -1249,8 +1249,8 @@ export const WindIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='138.5' x2='224.2' y1='5.1' y2='153.5' gradientUnits='userSpaceOnUse'>
@@ -1294,8 +1294,8 @@ export const ThunderStormIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='99.5' x2='232.6' y1='30.7' y2='261.4' gradientUnits='userSpaceOnUse'>
@@ -1347,8 +1347,8 @@ export const HazeIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='99.5' x2='232.6' y1='30.7' y2='261.4' gradientUnits='userSpaceOnUse'>
@@ -1459,8 +1459,8 @@ export const AshIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<symbol id='h' viewBox='0 0 196 196'>
@@ -1655,8 +1655,8 @@ export const SquallIcon: FC<IProps> = (props) => (
 		xmlnsXlink='http://www.w3.org/1999/xlink'
 		viewBox='0 0 512 512'
 		className={props.className || ''}
-		width={props.width || 20}
-		height={props.height || 20}
+		width={props.width || 150}
+		height={props.height || 150}
 	>
 		<defs>
 			<linearGradient id='a' x1='52.7' x2='133.4' y1='9.6' y2='149.3' gradientUnits='userSpaceOnUse'>

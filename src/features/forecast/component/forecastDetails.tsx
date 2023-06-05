@@ -1,6 +1,25 @@
 import 'assets/styles/module/forecast.scss';
 import React from 'react';
 import Spinner from 'shared/components/spinner/spinner';
+
+import {
+	ThunderStormIcon,
+	DrizzleIcon,
+	RainIcon,
+	SnowIcon,
+	MistIcon,
+	SmokeIcon,
+	HazeIcon,
+	DustIcon,
+	FogIcon,
+	AshIcon,
+	SquallIcon,
+	TornadoIcon,
+	ClearSkyIcon,
+	CloudIcon
+} from 'shared/components/icons/icons';
+import isEmpty from 'lodash/isEmpty';
+import { IWeatherIcon } from '../interface/interface';
 interface IForecastDetails {
 	weatherData: Record<string, any>;
 	isLoading: boolean;
@@ -13,14 +32,34 @@ const ForecastDetails: React.FC<IForecastDetails> = (props) => {
 
 	const visibilityInKm = metersToKilometers(weatherData.visibility);
 
+	const weatherConditionIconMapper: IWeatherIcon = {
+		ThunderStormIcon: <ThunderStormIcon />,
+		Drizzle: <DrizzleIcon />,
+		Rain: <RainIcon />,
+		Snow: <SnowIcon />,
+		Mist: <MistIcon />,
+		Smoke: <SmokeIcon />,
+		Haze: <HazeIcon />,
+		Dust: <DustIcon />,
+		Fog: <FogIcon />,
+		Sand: <DustIcon />,
+		Ash: <AshIcon />,
+		Squall: <SquallIcon />,
+		Tornado: <TornadoIcon />,
+		Clear: <ClearSkyIcon />,
+		Clouds: <CloudIcon />
+	};
 	return (
 		<div className='forecast__container width--30 height--full-viewport overflow--auto'>
 			{!isLoading && (
 				<React.Fragment>
-					<p className='m--25 font--semi-bold font-size--28 flex flex--column '>
-						{weatherData.name}
-						<span className='font-size--md'>{weatherData.sys?.country}</span>
-					</p>
+					<div className='flex justify-content--between align-items--center'>
+						<p className='m--25 font--semi-bold font-size--28 flex flex--column '>
+							{weatherData?.name}
+							<span className='font-size--md'>{weatherData.sys?.country}</span>
+						</p>
+						<div>{!isEmpty(weatherData) && weatherConditionIconMapper[weatherData.weather[0]?.main]}</div>
+					</div>
 
 					<div className='break__line' />
 					<p className='m--25 pt--15 font--semi-bold font-size--24'>Weather Details</p>

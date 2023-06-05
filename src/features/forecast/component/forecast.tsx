@@ -5,8 +5,8 @@ import ForecastDetails from './forecastDetails';
 import ForecastHeader from './forecastHeader';
 
 const Forecast = () => {
-	const [lat, setLat] = useState(0);
-	const [long, setLong] = useState(0);
+	const [lat, setLat] = useState(28.6139);
+	const [long, setLong] = useState(77.209);
 	const [weatherData, setWeatherData] = useState<Record<string, any>>({});
 	const [isLoading, setIsLoading] = useState(false);
 	const API_key = process.env.REACT_APP_API_KEY;
@@ -16,7 +16,7 @@ const Forecast = () => {
 			setLat(position.coords.latitude);
 			setLong(position.coords.longitude);
 		});
-	}, [lat, long]);
+	}, []);
 
 	const getWeatherData = useCallback(() => {
 		setIsLoading(true);
