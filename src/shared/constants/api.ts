@@ -4,7 +4,8 @@ import isEmpty from 'lodash/isEmpty';
 export const API_CONFIG = {
 	baseUrl: process.env.REACT_APP_BASE_URL,
 	path: {
-		weather: 'weather'
+		weather: 'weather',
+		forecast: 'forecast'
 	}
 };
 
