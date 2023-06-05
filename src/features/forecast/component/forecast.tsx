@@ -3,6 +3,7 @@ import { API_CONFIG } from 'shared/constants/api';
 import httpService from 'shared/services/http.service';
 import ForecastDetails from './forecastDetails';
 import ForecastHeader from './forecastHeader';
+import { isEmpty } from 'lodash';
 
 const Forecast = () => {
 	const [lat, setLat] = useState(28.6139);
@@ -18,24 +19,43 @@ const Forecast = () => {
 		});
 	}, []);
 
-	const getWeatherData = useCallback(() => {
-		setIsLoading(true);
-		(lat && long) > 0 &&
-			httpService
-				.get(
-					`${'https://api.openweathermap.org/data/2.5'}/${
-						API_CONFIG.path.weather
-					}?lat=${lat}&lon=${long}&units=metric&APPID=${API_key}`
-				)
-				.then((response) => {
-					setWeatherData(response);
-					setIsLoading(false);
-				})
-				.catch((error) => {
-					setIsLoading(false);
-					console.error('error', error);
-				});
-	}, [lat, long]);
+	const getWeatherData = useCallback(
+		(cityName?: string) => {
+			setIsLoading(true);
+			isEmpty(cityName) &&
+				(lat && long) > 0 &&
+				httpService
+					.get(
+						`${'https://api.openweathermap.org/data/2.5'}/${
+							API_CONFIG.path.weather
+						}?lat=${lat}&lon=${long}&units=metric&APPID=${API_key}`
+					)
+					.then((response) => {
+						setWeatherData(response);
+						setIsLoading(false);
+					})
+					.catch((error) => {
+						setIsLoading(false);
+						console.error('error', error);
+					});
+			!isEmpty(cityName) &&
+				httpService
+					.get(
+						`${'https://api.openweathermap.org/data/2.5'}/${
+							API_CONFIG.path.weather
+						}?q=${cityName}&units=metric&APPID=${API_key}`
+					)
+					.then((response) => {
+						setWeatherData(response);
+						setIsLoading(false);
+					})
+					.catch((error) => {
+						setIsLoading(false);
+						console.error('error', error);
+					});
+		},
+		[lat, long]
+	);
 
 	useEffect(() => {
 		getWeatherData();
@@ -44,7 +64,7 @@ const Forecast = () => {
 
 	return (
 		<div className='flex position--relative'>
-			<ForecastHeader weatherData={weatherData} />
+			<ForecastHeader weatherData={weatherData} getWeatherData={getWeatherData} />
 			<ForecastDetails weatherData={weatherData} isLoading={isLoading} />
 		</div>
 	);

@@ -1,10 +1,23 @@
 import { isEmpty } from 'lodash';
-import { SearchIcon } from 'shared/components/icons/icons';
-import { weatherConditionMapper, weatherSafetyMapper } from 'shared/constants/constant';
-import { IForecast } from '../interface/interface';
-import hazeWeather from '../../../assets/weatherVideo/hazeWeather.mp4';
 
-const ForecastHeader: React.FC<IForecast> = ({ weatherData }) => {
+import Select, { StylesConfig } from 'react-select';
+import { SearchIcon } from 'shared/components/icons/icons';
+import {
+	CITY_NAME_LIST,
+	reactSelectStyles,
+	weatherConditionMapper,
+	weatherSafetyMapper
+} from 'shared/constants/constant';
+import { IDropDownOptions, IForecast } from '../interface/interface';
+import hazeWeather from '../../../assets/weatherVideo/hazeWeather.mp4';
+import { useState } from 'react';
+
+const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) => {
+	const [selectedOption, setSelectedOption] = useState();
+	const handleChange = (selectedOption: any) => {
+		setSelectedOption(selectedOption);
+		getWeatherData && getWeatherData(selectedOption?.value);
+	};
 	return (
 		<div className='width--70 '>
 			<video
@@ -18,7 +31,19 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData }) => {
 				<p className='ml--20 font--bold '>
 					WeatherNow <sup className='font--bold'>Tm</sup>
 				</p>
-				<SearchIcon width={'20px'} height={'20px'} />
+				<div className='position--relative search_wrapper'>
+					<Select
+						value={selectedOption}
+						onChange={handleChange}
+						options={CITY_NAME_LIST}
+						className='form-field no-padding width--206px cursor-pointer'
+						isSearchable={true}
+						isClearable={true}
+						placeholder={'Search city name'}
+						styles={reactSelectStyles as StylesConfig<IDropDownOptions, false>}
+					/>
+					<SearchIcon className='position--absolute search_icon' width='20' height='20' />
+				</div>
 			</div>
 			{!isEmpty(weatherData) && (
 				<div className='height--full flex align-items--center m--35'>
