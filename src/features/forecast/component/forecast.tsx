@@ -67,7 +67,7 @@ const Forecast = () => {
 				}?lat=${lat}&lon=${long}&units=metric&APPID=${API_key}`
 			)
 			.then((response) => {
-				setForecastData(response.data.list);
+				setForecastData(response.list);
 			})
 			.catch((error) => {
 				setIsLoading(false);
@@ -84,7 +84,15 @@ const Forecast = () => {
 	return (
 		<div className='flex position--relative'>
 			<ForecastHeader weatherData={weatherData} getWeatherData={getWeatherData} />
-			<ForecastDetails weatherData={weatherData} isLoading={isLoading} forecastData={forecastData} />
+			<ForecastDetails
+				weatherData={weatherData}
+				isLoading={isLoading}
+				forecastData={forecastData}
+				dt_txt={''}
+				main={{
+					temp: 0
+				}}
+			/>
 		</div>
 	);
 };

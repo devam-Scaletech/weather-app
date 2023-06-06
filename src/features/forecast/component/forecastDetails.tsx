@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Line } from 'react-chartjs-2';
+import { Chart, ChartOptions, CategoryScale, LinearScale, Title, LineElement, PointElement } from 'chart.js';
 import isEmpty from 'lodash/isEmpty';
 import Spinner from 'shared/components/spinner/spinner';
 import {
@@ -20,11 +22,13 @@ import {
 	PressureIcon
 } from 'shared/components/icons/icons';
 
-import { IForecast, IWeatherIcon } from '../interface/interface';
+import { IForecast, IForecastChartData, IWeatherIcon } from '../interface/interface';
 import 'assets/styles/module/forecast.scss';
+Chart.register(CategoryScale, LinearScale, Title, LineElement, PointElement);
 
-const ForecastDetails: React.FC<IForecast> = (props) => {
-	const { weatherData, isLoading } = props;
+const ForecastDetails: React.FC<IForecast & IForecastChartData> = (props) => {
+	const { weatherData, isLoading, forecastData } = props;
+
 	const metersToKilometers = (meters: number) => {
 		return meters / 1000;
 	};
@@ -48,6 +52,49 @@ const ForecastDetails: React.FC<IForecast> = (props) => {
 		Clear: <ClearSkyIcon />,
 		Clouds: <CloudIcon />
 	};
+
+	const transformData = () => {
+		if (!forecastData) {
+			return null;
+		}
+		const chartData = {
+			labels: [] as string[],
+			datasets: [
+				{
+					label: 'Temperature',
+					data: [] as number[],
+					fill: false,
+					borderColor: 'rgba(75, 192, 192, 1)'
+				}
+			]
+		};
+
+		forecastData.forEach((item: IForecastChartData) => {
+			const dateObj = new Date(item.dt_txt);
+			const formattedDate = dateObj.toLocaleDateString('en-US', {
+				month: 'long',
+				day: 'numeric'
+			});
+			chartData.labels.push(formattedDate);
+			chartData.datasets[0].data.push(item.main.temp);
+		});
+
+		return chartData;
+	};
+	const chartData = transformData();
+	const options: ChartOptions<'line'> = {
+		scales: {
+			x: {
+				type: 'category',
+				labels: chartData?.labels
+			},
+			y: {
+				type: 'linear',
+				beginAtZero: true
+			}
+		}
+	};
+
 	return (
 		<div className='forecast__container width--30 height--full-viewport overflow--auto'>
 			{!isLoading && (
@@ -93,9 +140,7 @@ const ForecastDetails: React.FC<IForecast> = (props) => {
 						<div className='m--25 flex  flex--column'>
 							<p className='font--semi-bold mr--10 font-size--22 flex align-items--center'>
 								Wind
-								{/* <span> */}
 								<CompassIcon width='50' height='50' />
-								{/* </span> */}
 							</p>
 
 							<h1 className='mt--30'>
@@ -114,6 +159,11 @@ const ForecastDetails: React.FC<IForecast> = (props) => {
 								<span className='ml--10 font--medium'>hpa</span>
 							</h1>
 						</div>
+					</div>
+					<div className='break__line' />
+					<div className='m--25 flex  flex--column'>
+						<p className='pt--15 font--semi-bold font-size--24 pb--15'>Weekly Chart</p>
+						{chartData ? <Line data={chartData} options={options} /> : <Spinner />}
 					</div>
 				</React.Fragment>
 			)}
