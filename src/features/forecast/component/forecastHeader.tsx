@@ -6,29 +6,31 @@ import {
 	CITY_NAME_LIST,
 	reactSelectStyles,
 	weatherConditionMapper,
+	weatherConditionVideoMapper,
 	weatherSafetyMapper
 } from 'shared/constants/constant';
 import { IDropDownOptions, IForecast } from '../interface/interface';
 import hazeWeather from '../../../assets/weatherVideo/hazeWeather.mp4';
 import { useState } from 'react';
 
-const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getWeeklyData, setCity }) => {
+const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) => {
 	const [selectedOption, setSelectedOption] = useState();
 	const handleChange = (selectedOption: any) => {
 		setSelectedOption(selectedOption);
 		getWeatherData && getWeatherData(selectedOption?.value);
-		getWeeklyData && getWeeklyData();
-		setCity && setCity('');
 	};
+
 	return (
 		<div className='width--70 '>
-			<video
-				src={hazeWeather}
-				autoPlay
-				loop
-				muted
-				className='background__weather position--absolute z-index--negative-1 width--70 height--full-viewport'
-			/>
+			{!isEmpty(weatherData) && (
+				<video
+					src={weatherConditionVideoMapper[weatherData.weather[0]?.main]}
+					autoPlay
+					loop
+					muted
+					className='background__weather position--absolute z-index--negative-1 width--70 height--full-viewport'
+				/>
+			)}
 			<div className='flex justify-content--between m--35'>
 				<p className='ml--20 font--bold '>
 					WeatherNow <sup className='font--bold'>Tm</sup>

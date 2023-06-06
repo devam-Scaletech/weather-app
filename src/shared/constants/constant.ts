@@ -1,9 +1,35 @@
 import { CSSProperties } from 'react';
+import Thunderstorm from 'assets/weatherVideo/Thunderstorm.mp4';
+import Rain from 'assets/weatherVideo/Rain.mp4';
+import snow from 'assets/weatherVideo/snow.mp4';
+import Fog from 'assets/weatherVideo/Fog.mp4';
+import hazeWeather from 'assets/weatherVideo/hazeWeather.mp4';
+import dust from 'assets/weatherVideo/dust.mp4';
+import Tornado from 'assets/weatherVideo/Tornado.mp4';
+import skyClear from 'assets/weatherVideo/skyClear.mp4';
+import cloud from 'assets/weatherVideo/cloud.mp4';
 
 export const metersToKilometers = (meters: number) => {
 	return meters / 1000;
 };
 
+export const weatherConditionVideoMapper: { [key: string]: string } = {
+	Thunderstorm: Thunderstorm,
+	Drizzle: Rain,
+	Rain: Rain,
+	Snow: snow,
+	Mist: Fog,
+	Smoke: Fog,
+	Haze: hazeWeather,
+	Dust: dust,
+	Fog: Fog,
+	Sand: dust,
+	Ash: dust,
+	Squall: Thunderstorm,
+	Tornado: Tornado,
+	Clear: skyClear,
+	Clouds: cloud
+};
 export const weatherConditionMapper: { [key: string]: string } = {
 	Thunderstorm: 'Expect thunderstorms today.',
 	Drizzle: 'Expect light rain or drizzle today.',
