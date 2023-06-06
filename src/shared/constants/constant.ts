@@ -1,5 +1,9 @@
 import { CSSProperties } from 'react';
 
+export const metersToKilometers = (meters: number) => {
+	return meters / 1000;
+};
+
 export const weatherConditionMapper: { [key: string]: string } = {
 	Thunderstorm: 'Expect thunderstorms today.',
 	Drizzle: 'Expect light rain or drizzle today.',
@@ -97,6 +101,7 @@ export const reactSelectStyles = {
 		return { ...base, opacity: opacity, transition: transition };
 	}
 };
+
 export const CITY_NAME_LIST = [
 	{
 		label: 'Abidjan',

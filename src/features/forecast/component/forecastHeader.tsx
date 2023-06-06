@@ -12,11 +12,13 @@ import { IDropDownOptions, IForecast } from '../interface/interface';
 import hazeWeather from '../../../assets/weatherVideo/hazeWeather.mp4';
 import { useState } from 'react';
 
-const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) => {
+const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getWeeklyData, setCity }) => {
 	const [selectedOption, setSelectedOption] = useState();
 	const handleChange = (selectedOption: any) => {
 		setSelectedOption(selectedOption);
 		getWeatherData && getWeatherData(selectedOption?.value);
+		getWeeklyData && getWeeklyData();
+		setCity && setCity('');
 	};
 	return (
 		<div className='width--70 '>

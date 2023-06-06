@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart, ChartOptions, CategoryScale, LinearScale, Title, LineElement, PointElement } from 'chart.js';
+import {
+	Chart,
+	ChartOptions,
+	CategoryScale,
+	LinearScale,
+	Title,
+	LineElement,
+	PointElement,
+	Filler,
+	Tooltip
+} from 'chart.js';
 import isEmpty from 'lodash/isEmpty';
 import Spinner from 'shared/components/spinner/spinner';
 import {
@@ -22,16 +32,14 @@ import {
 	PressureIcon
 } from 'shared/components/icons/icons';
 
+import { metersToKilometers } from 'shared/constants/constant';
 import { IForecast, IForecastChartData, IWeatherIcon } from '../interface/interface';
 import 'assets/styles/module/forecast.scss';
-Chart.register(CategoryScale, LinearScale, Title, LineElement, PointElement);
+
+Chart.register(CategoryScale, LinearScale, Title, LineElement, PointElement, Filler, Tooltip);
 
 const ForecastDetails: React.FC<IForecast & IForecastChartData> = (props) => {
 	const { weatherData, isLoading, forecastData } = props;
-
-	const metersToKilometers = (meters: number) => {
-		return meters / 1000;
-	};
 
 	const visibilityInKm = metersToKilometers(weatherData.visibility);
 
@@ -63,8 +71,13 @@ const ForecastDetails: React.FC<IForecast & IForecastChartData> = (props) => {
 				{
 					label: 'Temperature',
 					data: [] as number[],
-					fill: false,
-					borderColor: 'rgba(75, 192, 192, 1)'
+					fill: true, // Fill the area under the line
+					backgroundColor: 'rgba(255,255,255,0.3)',
+					borderColor: 'white', // Border color of the line,
+					borderWidth: 3,
+
+					borderDash: [],
+					borderDashOffset: 0.0
 				}
 			]
 		};
@@ -83,14 +96,41 @@ const ForecastDetails: React.FC<IForecast & IForecastChartData> = (props) => {
 	};
 	const chartData = transformData();
 	const options: ChartOptions<'line'> = {
+		plugins: {
+			tooltip: {
+				mode: 'index',
+				intersect: true
+			}
+		},
+		elements: {
+			line: {
+				tension: 0.4 // smooth lines
+			}
+		},
 		scales: {
 			x: {
 				type: 'category',
-				labels: chartData?.labels
+				labels: chartData?.labels,
+				ticks: {
+					display: false
+				},
+				grid: {
+					display: false
+				}
 			},
 			y: {
 				type: 'linear',
-				beginAtZero: true
+				beginAtZero: true,
+				ticks: {
+					color: 'white',
+					font: {
+						weight: 'bold',
+						size: 15
+					}
+				},
+				grid: {
+					display: false
+				}
 			}
 		}
 	};

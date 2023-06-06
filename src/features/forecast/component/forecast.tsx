@@ -9,6 +9,7 @@ import { IForecastChartData } from '../interface/interface';
 const Forecast = () => {
 	const [lat, setLat] = useState(28.6139);
 	const [long, setLong] = useState(77.209);
+	const [city, setCity] = useState<string | undefined>();
 	const [weatherData, setWeatherData] = useState<Record<string, any>>({});
 	const [isLoading, setIsLoading] = useState(false);
 	const [forecastData, setForecastData] = useState<IForecastChartData[]>([]);
@@ -49,6 +50,7 @@ const Forecast = () => {
 					)
 					.then((response) => {
 						setWeatherData(response);
+						setCity(cityName);
 						setIsLoading(false);
 					})
 					.catch((error) => {
@@ -59,31 +61,57 @@ const Forecast = () => {
 		[lat, long]
 	);
 
-	const getWeeklyData = () => {
-		httpService
-			.get(
-				`${'https://api.openweathermap.org/data/2.5'}/${
-					API_CONFIG.path.forecast
-				}?lat=${lat}&lon=${long}&units=metric&APPID=${API_key}`
-			)
-			.then((response) => {
-				setForecastData(response.list);
-			})
-			.catch((error) => {
-				setIsLoading(false);
-				console.error('error', error);
-			});
-	};
+	const getWeeklyData = useCallback(() => {
+		setIsLoading(true);
+		isEmpty(city) &&
+			httpService
+				.get(
+					`${'https://api.openweathermap.org/data/2.5'}/${
+						API_CONFIG.path.forecast
+					}?lat=${lat}&lon=${long}&units=metric&APPID=${API_key}`
+				)
+				.then((response) => {
+					setForecastData(response.list);
+					setIsLoading(false);
+				})
+				.catch((error) => {
+					setIsLoading(false);
+					console.error('error', error);
+				});
+		!isEmpty(city) &&
+			httpService
+				.get(
+					`${'https://api.openweathermap.org/data/2.5'}/${
+						API_CONFIG.path.forecast
+					}?q=${city}&units=metric&APPID=${API_key}`
+				)
+				.then((response) => {
+					setForecastData(response.list);
+					setIsLoading(false);
+				})
+				.catch((error) => {
+					setIsLoading(false);
+					console.error('error', error);
+				});
+	}, [city, lat, long]);
 
 	useEffect(() => {
 		getWeatherData();
 		getCurrentLocation();
-		getWeeklyData();
 	}, [lat, long]);
+
+	useEffect(() => {
+		getWeeklyData();
+	}, [lat, long, city]);
 
 	return (
 		<div className='flex position--relative'>
-			<ForecastHeader weatherData={weatherData} getWeatherData={getWeatherData} />
+			<ForecastHeader
+				weatherData={weatherData}
+				getWeatherData={getWeatherData}
+				getWeeklyData={getWeeklyData}
+				setCity={setCity}
+			/>
 			<ForecastDetails
 				weatherData={weatherData}
 				isLoading={isLoading}

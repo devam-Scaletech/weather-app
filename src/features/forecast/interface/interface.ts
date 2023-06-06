@@ -13,6 +13,8 @@ export interface IForecast {
 	weatherData: Record<string, any>;
 	forecastData?: IForecastChartData[];
 	getWeatherData?: (cityName: string) => void;
+	getWeeklyData?: () => void;
+	setCity?: (city: string | undefined) => void;
 	isLoading?: boolean;
 }
 
