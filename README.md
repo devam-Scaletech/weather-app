@@ -1,3 +1,7 @@
+# WeatherNow
+
+Stay informed about the weather with our user-friendly web app that provides real-time forecasts and alerts for your location.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
