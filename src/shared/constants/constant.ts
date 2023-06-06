@@ -44,7 +44,7 @@ export const reactSelectStyles = {
 	option: (base: CSSProperties, state: any) => ({
 		...base,
 		color: 'black',
-		backgroundColor: state.isSelected ? '#297CC0' : state.isFocused ? '' : '',
+		backgroundColor: state.isSelected ? '#297CC0' : state.isFocused ? '#297CC0' : '',
 		':active': {
 			backgroundColor: '#297CC0',
 			color: 'white'
