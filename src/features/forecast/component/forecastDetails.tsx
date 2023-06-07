@@ -32,7 +32,7 @@ import {
 	PressureIcon
 } from 'shared/components/icons/icons';
 
-import { metersToKilometers } from 'shared/constants/constant';
+import { formatTime, metersToKilometers } from 'shared/constants/constant';
 import { IForecast, IForecastChartData, IWeatherIcon } from '../interface/interface';
 import 'assets/styles/module/forecast.scss';
 
@@ -151,32 +151,36 @@ const ForecastDetails: React.FC<IForecast & IForecastChartData> = (props) => {
 					<p className='m--25 pt--15 font--semi-bold font-size--24'>Weather Details</p>
 
 					<p className='m--25 flex justify-content--between align-items--center'>
+						<span className='font--semi-bold mr--10'>Temperature</span>
+						<span className='font--semi-bold'>{Math.trunc(weatherData.main?.temp)}&deg; C</span>
+					</p>
+					<p className='m--25 flex justify-content--between align-items--center'>
 						<span className='font--semi-bold mr--10'>Feels like</span>
-						{weatherData.main?.feels_like}&deg;C
+						<span className='font--semi-bold'>{Math.trunc(weatherData.main?.feels_like)}&deg; C</span>
 					</p>
 
 					<p className='m--25 flex justify-content--between align-items--center'>
 						<span className='font--semi-bold mr--10'>Sunrise</span>
-						{new Date(weatherData.sys?.sunrise * 1000).toLocaleTimeString('en-IN')}
+						<span className='font--semi-bold'>{formatTime(weatherData.sys?.sunrise)}</span>
 					</p>
 
 					<p className='m--25 flex justify-content--between align-items--center'>
 						<span className='font--semi-bold mr--10'>Sunset</span>
-						{new Date(weatherData.sys?.sunset * 1000).toLocaleTimeString('en-IN')}
+						<span className='font--semi-bold'>{formatTime(weatherData.sys?.sunset)}</span>
 					</p>
 
 					<p className='m--25 flex justify-content--between align-items--center'>
 						<span className='font--semi-bold mr--10'>Humidity</span>
-						{weatherData.main?.humidity} %
+						<span className='font--semi-bold'>{weatherData.main?.humidity} %</span>
 					</p>
 
 					<p className='m--25 flex justify-content--between'>
 						<span className='font--semi-bold mr--10'>Visibility</span>
-						{visibilityInKm} km
+						<span className='font--semi-bold'>{visibilityInKm} km</span>
 					</p>
 
 					<div className='break__line' />
-					<div className='flex justify-content--between m--10'>
+					<div className='flex justify-content--around m--10'>
 						<div className='m--25 flex  flex--column'>
 							<p className='font--semi-bold mr--10 font-size--22 flex align-items--center'>
 								Wind
@@ -200,7 +204,7 @@ const ForecastDetails: React.FC<IForecast & IForecastChartData> = (props) => {
 							</h1>
 						</div>
 					</div>
-					<div className='break__line' />
+					<div className='break__line mt--25' />
 					<div className='m--25 flex  flex--column'>
 						<p className='pt--15 font--semi-bold font-size--24 pb--15'>Weekly Chart</p>
 						{chartData ? <Line data={chartData} options={options} /> : <Spinner />}

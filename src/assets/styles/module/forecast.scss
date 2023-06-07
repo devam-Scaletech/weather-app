@@ -3,6 +3,7 @@
 .background__weather {
 	height: 745px;
 	object-fit: cover;
+	filter: brightness(0.6);
 }
 .forecast__container {
 	background-color: $white;

@@ -8,9 +8,14 @@ import dust from 'assets/weatherVideo/dust.mp4';
 import Tornado from 'assets/weatherVideo/Tornado.mp4';
 import skyClear from 'assets/weatherVideo/skyClear.mp4';
 import cloud from 'assets/weatherVideo/cloud.mp4';
+import moment from 'moment';
 
 export const metersToKilometers = (meters: number) => {
 	return meters / 1000;
+};
+
+export const formatTime = (time: number) => {
+	return moment(new Date(time * 1000), 'hh:mm:ss A').format('hh : mm A');
 };
 
 export const weatherConditionVideoMapper: { [key: string]: string } = {
@@ -30,6 +35,7 @@ export const weatherConditionVideoMapper: { [key: string]: string } = {
 	Clear: skyClear,
 	Clouds: cloud
 };
+
 export const weatherConditionMapper: { [key: string]: string } = {
 	Thunderstorm: 'Expect thunderstorms today.',
 	Drizzle: 'Expect light rain or drizzle today.',
@@ -125,6 +131,9 @@ export const reactSelectStyles = {
 		const opacity = state.isDisabled ? 0.5 : 1;
 		const transition = 'opacity 300ms';
 		return { ...base, opacity: opacity, transition: transition };
+	},
+	noOptionsMessage: (base: CSSProperties) => {
+		return { ...base };
 	}
 };
 

@@ -1,6 +1,7 @@
 import { isEmpty } from 'lodash';
 
-import Select, { StylesConfig } from 'react-select';
+import { useState } from 'react';
+import Select, { GroupBase, NoticeProps, StylesConfig, components } from 'react-select';
 import { SearchIcon } from 'shared/components/icons/icons';
 import {
 	CITY_NAME_LIST,
@@ -10,14 +11,21 @@ import {
 	weatherSafetyMapper
 } from 'shared/constants/constant';
 import { IDropDownOptions, IForecast } from '../interface/interface';
-import hazeWeather from '../../../assets/weatherVideo/hazeWeather.mp4';
-import { useState } from 'react';
 
 const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) => {
 	const [selectedOption, setSelectedOption] = useState();
+
 	const handleChange = (selectedOption: any) => {
 		setSelectedOption(selectedOption);
 		getWeatherData && getWeatherData(selectedOption?.value);
+	};
+
+	const NoOptionsMessage = (props: NoticeProps<IDropDownOptions, false, GroupBase<IDropDownOptions>>) => {
+		return (
+			<components.NoOptionsMessage {...props}>
+				<span className='custom-css-class'>No city found</span>
+			</components.NoOptionsMessage>
+		);
 	};
 
 	return (
@@ -31,8 +39,8 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) =>
 					className='background__weather position--absolute z-index--negative-1 width--70 height--full-viewport'
 				/>
 			)}
-			<div className='flex justify-content--between m--35'>
-				<p className='ml--20 font--bold '>
+			<div className='flex justify-content--between m--35 align-items--center'>
+				<p className='ml--20 font--extra-bold font-size--22 '>
 					WeatherNow <sup className='font--bold'>Tm</sup>
 				</p>
 				<div className='position--relative search_wrapper'>
@@ -45,6 +53,7 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) =>
 						isClearable={true}
 						placeholder={'Search city name'}
 						styles={reactSelectStyles as StylesConfig<IDropDownOptions, false>}
+						components={{ NoOptionsMessage }}
 					/>
 					<SearchIcon className='position--absolute search_icon' width='20' height='20' />
 				</div>
@@ -56,10 +65,10 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) =>
 						<sup className='font-size--50 position--absolute top--10'>&deg;</sup>
 					</p>
 					<div className='flex flex--column'>
-						<p className='font-size--30 ml--45 width--full '>
+						<p className='font-size--30 ml--45 width--full font--semi-bold'>
 							{weatherConditionMapper[weatherData.weather[0]?.main]}
 						</p>
-						<span className='font-size--20 mt--20 ml--45 '>
+						<span className='font-size--22 mt--20 ml--45 font--semi-bold'>
 							{weatherSafetyMapper[weatherData.weather[0]?.main]}
 						</span>
 					</div>
