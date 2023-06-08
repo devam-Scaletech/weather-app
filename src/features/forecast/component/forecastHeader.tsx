@@ -2,13 +2,7 @@ import { useCallback, useState } from 'react';
 import Select, { GroupBase, NoticeProps, SingleValue, StylesConfig, components } from 'react-select';
 import isEmpty from 'lodash/isEmpty';
 import { SearchIcon } from 'shared/components/icons/icons';
-import {
-	CITY_NAME_LIST,
-	reactSelectStyles,
-	weatherConditionMapper,
-	weatherConditionVideoMapper,
-	weatherSafetyMapper
-} from 'shared/constants/constant';
+import { CITY_NAME_LIST, reactSelectStyles, weatherConditionMapper } from 'shared/constants/constant';
 import { IDropDownOptions, IForecast } from '../interface/interface';
 
 const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) => {
@@ -38,7 +32,7 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) =>
 		<div className='width--70 '>
 			{!isEmpty(weatherData) && (
 				<video
-					src={weatherConditionVideoMapper[weatherData.weather[0]?.main]}
+					src={weatherConditionMapper[weatherData.weather[0]?.main].weatherVideo}
 					autoPlay
 					loop
 					muted
@@ -72,10 +66,10 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) =>
 					</p>
 					<div className='flex flex--column'>
 						<p className='font-size--30 ml--45 width--full font--semi-bold'>
-							{weatherConditionMapper[weatherData.weather[0]?.main]}
+							{weatherConditionMapper[weatherData.weather[0]?.main].condition}
 						</p>
 						<span className='font-size--22 mt--20 ml--45 font--semi-bold'>
-							{weatherSafetyMapper[weatherData.weather[0]?.main]}
+							{weatherConditionMapper[weatherData.weather[0]?.main].safetyMsg}
 						</span>
 					</div>
 				</div>

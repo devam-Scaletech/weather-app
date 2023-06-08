@@ -3,3 +3,9 @@ export interface IResponseObject<T> {
 	message: string;
 	data: T;
 }
+
+export interface IWeatherCondition {
+	condition: string;
+	safetyMsg: string;
+	weatherVideo: string;
+}
