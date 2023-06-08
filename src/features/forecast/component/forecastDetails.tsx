@@ -75,7 +75,6 @@ const ForecastDetails: React.FC<IForecast & IForecastChartData> = (props) => {
 					backgroundColor: 'rgba(255,255,255,0.3)',
 					borderColor: 'white', // Border color of the line,
 					borderWidth: 3,
-
 					borderDash: [],
 					borderDashOffset: 0.0
 				}
@@ -89,7 +88,7 @@ const ForecastDetails: React.FC<IForecast & IForecastChartData> = (props) => {
 				day: 'numeric'
 			});
 			chartData.labels.push(formattedDate);
-			chartData.datasets[0].data.push(item.main.temp);
+			chartData.datasets[0].data.push(Math.trunc(item.main.temp));
 		});
 
 		return chartData;
