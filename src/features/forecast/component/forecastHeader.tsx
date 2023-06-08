@@ -32,7 +32,7 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getW
 	};
 
 	return (
-		<div className='width--70 '>
+		<div className='width--70 forecast_header__container'>
 			{!isEmpty(weatherData) && !isLoading && (
 				<video
 					src={weatherConditionMapper[weatherData.weather[0]?.main].weatherVideo}
@@ -42,7 +42,7 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getW
 					className='background__weather position--absolute z-index--negative-1 width--70 height--full-viewport'
 				/>
 			)}
-			<div className='flex justify-content--between m--35 align-items--center'>
+			<div className='flex justify-content--between m--35 align-items--center web_name__container'>
 				<p className='ml--20 font--extra-bold font-size--22 '>
 					WeatherNow <sup className='font--bold'>Tm</sup>
 				</p>

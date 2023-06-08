@@ -1,13 +1,19 @@
 @import '../_variable';
-
-.background__weather {
-	object-fit: cover;
-	transition-property: all;
-	filter: brightness(0.6);
-	animation: fadeIn 3s;
+.forecast_header__container {
+	.background__weather {
+		object-fit: cover;
+		transition-property: all;
+		filter: brightness(0.6);
+		animation: fadeIn 3s;
+	}
+	.search_wrapper {
+		.search_icon {
+			top: 8px;
+			left: 8px;
+		}
+	}
 }
-
-.forecast__container {
+.forecast__widget {
 	background-color: $white;
 	background-image: url('../../image/unsplash_RwVqa6ST69E.png');
 	height: 500px;
@@ -38,8 +44,8 @@
 }
 .break__line {
 	background-color: #dedede;
-	width: 420px;
 	height: 2px;
+	width: calc(100% - 90px);
 	margin: 0 auto;
 	border-radius: 25px;
 }
@@ -47,11 +53,4 @@
 .horizontal_break__line {
 	border-left: 2px solid #dedede;
 	height: 200px;
-}
-
-.search_wrapper {
-	.search_icon {
-		top: 8px;
-		left: 8px;
-	}
 }

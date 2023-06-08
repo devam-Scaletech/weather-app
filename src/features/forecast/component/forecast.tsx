@@ -103,7 +103,7 @@ const Forecast = () => {
 	}, [lat, long]);
 
 	return (
-		<div className='flex position--relative'>
+		<div className='flex position--relative forecast__container'>
 			<ForecastHeader
 				weatherData={weatherData}
 				getWeatherData={getWeatherData}

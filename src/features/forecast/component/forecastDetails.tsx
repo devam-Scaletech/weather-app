@@ -135,10 +135,10 @@ const ForecastDetails: React.FC<IForecast> = (props) => {
 	};
 
 	return (
-		<div className='forecast__container width--30 height--full-viewport overflow--auto'>
+		<div className='forecast__widget width--30 height--full-viewport overflow--auto'>
 			{!isLoading && (
 				<div className='forecast__wrapper'>
-					<div className='flex justify-content--between align-items--center'>
+					<div className='flex justify-content--between align-items--center city_details__wrapper'>
 						<p className='m--25 font--semi-bold font-size--28 flex flex--column '>
 							{weatherData?.name}
 							<span className='font-size--md'>{weatherData.sys?.country}</span>
@@ -179,7 +179,7 @@ const ForecastDetails: React.FC<IForecast> = (props) => {
 					</p>
 
 					<div className='break__line' />
-					<div className='flex justify-content--around m--10'>
+					<div className='flex justify-content--around m--10 wind_wrapper'>
 						<div className='m--25 flex  flex--column'>
 							<p className='font--semi-bold mr--10 font-size--22 flex align-items--center'>
 								Wind
@@ -204,7 +204,7 @@ const ForecastDetails: React.FC<IForecast> = (props) => {
 						</div>
 					</div>
 					<div className='break__line mt--25' />
-					<div className='m--25 flex  flex--column'>
+					<div className='m--25 flex flex--column chart__container'>
 						<p className='pt--15 font--semi-bold font-size--24 pb--15'>Weekly Chart</p>
 						{chartData ? <Line data={chartData} options={options} /> : <Spinner />}
 					</div>
