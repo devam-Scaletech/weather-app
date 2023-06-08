@@ -1,7 +1,6 @@
-import { isEmpty } from 'lodash';
-
-import { useState } from 'react';
-import Select, { GroupBase, NoticeProps, StylesConfig, components } from 'react-select';
+import { useCallback, useState } from 'react';
+import Select, { GroupBase, NoticeProps, SingleValue, StylesConfig, components } from 'react-select';
+import isEmpty from 'lodash/isEmpty';
 import { SearchIcon } from 'shared/components/icons/icons';
 import {
 	CITY_NAME_LIST,
@@ -13,12 +12,19 @@ import {
 import { IDropDownOptions, IForecast } from '../interface/interface';
 
 const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) => {
-	const [selectedOption, setSelectedOption] = useState();
+	const [selectedOption, setSelectedOption] = useState<IDropDownOptions>();
 
-	const handleChange = (selectedOption: any) => {
-		setSelectedOption(selectedOption);
-		getWeatherData && getWeatherData(selectedOption?.value);
-	};
+	const handleOnChange = useCallback(
+		(selectedOption: SingleValue<IDropDownOptions>) => {
+			if (selectedOption) {
+				setSelectedOption(selectedOption);
+				getWeatherData && getWeatherData(selectedOption?.value);
+			} else {
+				setSelectedOption(undefined);
+			}
+		},
+		[getWeatherData]
+	);
 
 	const NoOptionsMessage = (props: NoticeProps<IDropDownOptions, false, GroupBase<IDropDownOptions>>) => {
 		return (
@@ -46,7 +52,7 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) =>
 				<div className='position--relative search_wrapper'>
 					<Select
 						value={selectedOption}
-						onChange={handleChange}
+						onChange={handleOnChange}
 						options={CITY_NAME_LIST}
 						className='form-field no-padding width--206px cursor-pointer'
 						isSearchable={true}
