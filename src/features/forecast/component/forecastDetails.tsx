@@ -38,7 +38,7 @@ import 'assets/styles/module/forecast.scss';
 
 Chart.register(CategoryScale, LinearScale, Title, LineElement, PointElement, Filler, Tooltip);
 
-const ForecastDetails: React.FC<IForecast & IForecastChartData> = (props) => {
+const ForecastDetails: React.FC<IForecast> = (props) => {
 	const { weatherData, isLoading, forecastData } = props;
 
 	const visibilityInKm = metersToKilometers(weatherData.visibility);

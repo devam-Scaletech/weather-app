@@ -5,7 +5,7 @@ import { SearchIcon } from 'shared/components/icons/icons';
 import { CITY_NAME_LIST, reactSelectStyles, weatherConditionMapper } from 'shared/constants/constant';
 import { IDropDownOptions, IForecast } from '../interface/interface';
 
-const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) => {
+const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getWeeklyData }) => {
 	const [selectedOption, setSelectedOption] = useState<IDropDownOptions>();
 
 	const handleOnChange = useCallback(
@@ -13,12 +13,14 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) =>
 			if (selectedOption) {
 				setSelectedOption(selectedOption);
 				getWeatherData && getWeatherData(selectedOption?.value);
+				getWeeklyData && getWeeklyData(selectedOption?.value);
 			} else {
 				setSelectedOption(undefined);
 				getWeatherData && getWeatherData('');
+				getWeeklyData && getWeeklyData('');
 			}
 		},
-		[getWeatherData]
+		[getWeatherData, getWeeklyData]
 	);
 
 	const NoOptionsMessage = (props: NoticeProps<IDropDownOptions, false, GroupBase<IDropDownOptions>>) => {
