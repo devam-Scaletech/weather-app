@@ -15,6 +15,7 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData }) =>
 				getWeatherData && getWeatherData(selectedOption?.value);
 			} else {
 				setSelectedOption(undefined);
+				getWeatherData && getWeatherData('');
 			}
 		},
 		[getWeatherData]
