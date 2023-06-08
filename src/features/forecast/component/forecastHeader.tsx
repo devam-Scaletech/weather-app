@@ -5,7 +5,7 @@ import { SearchIcon } from 'shared/components/icons/icons';
 import { CITY_NAME_LIST, reactSelectStyles, weatherConditionMapper } from 'shared/constants/constant';
 import { IDropDownOptions, IForecast } from '../interface/interface';
 
-const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getWeeklyData }) => {
+const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getWeeklyData, isLoading }) => {
 	const [selectedOption, setSelectedOption] = useState<IDropDownOptions>();
 
 	const handleOnChange = useCallback(
@@ -33,7 +33,7 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getW
 
 	return (
 		<div className='width--70 '>
-			{!isEmpty(weatherData) && (
+			{!isEmpty(weatherData) && !isLoading && (
 				<video
 					src={weatherConditionMapper[weatherData.weather[0]?.main].weatherVideo}
 					autoPlay

@@ -137,7 +137,7 @@ const ForecastDetails: React.FC<IForecast> = (props) => {
 	return (
 		<div className='forecast__container width--30 height--full-viewport overflow--auto'>
 			{!isLoading && (
-				<React.Fragment>
+				<div className='forecast__wrapper'>
 					<div className='flex justify-content--between align-items--center'>
 						<p className='m--25 font--semi-bold font-size--28 flex flex--column '>
 							{weatherData?.name}
@@ -208,7 +208,7 @@ const ForecastDetails: React.FC<IForecast> = (props) => {
 						<p className='pt--15 font--semi-bold font-size--24 pb--15'>Weekly Chart</p>
 						{chartData ? <Line data={chartData} options={options} /> : <Spinner />}
 					</div>
-				</React.Fragment>
+				</div>
 			)}
 			{isLoading && <Spinner />}
 		</div>

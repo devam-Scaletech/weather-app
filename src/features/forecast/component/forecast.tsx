@@ -104,7 +104,12 @@ const Forecast = () => {
 
 	return (
 		<div className='flex position--relative'>
-			<ForecastHeader weatherData={weatherData} getWeatherData={getWeatherData} getWeeklyData={getWeeklyData} />
+			<ForecastHeader
+				weatherData={weatherData}
+				getWeatherData={getWeatherData}
+				getWeeklyData={getWeeklyData}
+				isLoading={isLoading}
+			/>
 			<ForecastDetails weatherData={weatherData} isLoading={isLoading} forecastData={forecastData} />
 		</div>
 	);
