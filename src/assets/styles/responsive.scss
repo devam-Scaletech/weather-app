@@ -72,7 +72,7 @@
 			.weather_msg_text {
 				p {
 					font-size: 25px;
-					width: fit-content;
+					width: fit-content !important;
 				}
 				span {
 					font-size: 15px;
@@ -81,6 +81,6 @@
 		}
 	}
 	.forecast__widget {
-		height: calc(100vh - 400px) !important;
+		height: calc(100vh - 369px) !important;
 	}
 }
