@@ -4,7 +4,7 @@ import { API_CONFIG } from 'shared/constants/api';
 import httpService from 'shared/services/http.service';
 import ForecastDetails from './forecastDetails';
 import ForecastHeader from './forecastHeader';
-import { IForecastChartData } from '../interface/interface';
+import { IDropDownOptions, IForecastChartData } from '../interface/interface';
 
 const Forecast = () => {
 	const [lat, setLat] = useState(28.6139);
@@ -12,6 +12,7 @@ const Forecast = () => {
 	const [weatherData, setWeatherData] = useState<Record<string, any>>({});
 	const [isLoading, setIsLoading] = useState(false);
 	const [forecastData, setForecastData] = useState<IForecastChartData[]>([]);
+	const [selectedOption, setSelectedOption] = useState<IDropDownOptions | null>(null);
 	const API_key = process.env.REACT_APP_API_KEY;
 
 	const getCurrentLocation = useCallback(() => {
@@ -34,6 +35,7 @@ const Forecast = () => {
 					)
 					.then((response) => {
 						setWeatherData(response);
+						setSelectedOption(null);
 						setIsLoading(false);
 					})
 					.catch((error) => {
@@ -45,10 +47,11 @@ const Forecast = () => {
 					.get(
 						`${'https://api.openweathermap.org/data/2.5'}/${
 							API_CONFIG.path.weather
-						}?q=${cityName}&units=metric&APPID=${API_key}`
+						}?q=${cityName?.trim()}&units=metric&APPID=${API_key}`
 					)
 					.then((response) => {
 						setWeatherData(response);
+						setSelectedOption(null);
 						setIsLoading(false);
 					})
 					.catch((error) => {
@@ -71,6 +74,7 @@ const Forecast = () => {
 					)
 					.then((response) => {
 						setForecastData(response.list);
+						setSelectedOption(null);
 						setIsLoading(false);
 					})
 					.catch((error) => {
@@ -86,6 +90,7 @@ const Forecast = () => {
 					)
 					.then((response) => {
 						setForecastData(response.list);
+						setSelectedOption(null);
 						setIsLoading(false);
 					})
 					.catch((error) => {
@@ -108,6 +113,8 @@ const Forecast = () => {
 				weatherData={weatherData}
 				getWeatherData={getWeatherData}
 				getWeeklyData={getWeeklyData}
+				selectedOption={selectedOption}
+				setSelectedOption={setSelectedOption}
 				isLoading={isLoading}
 			/>
 			<ForecastDetails weatherData={weatherData} isLoading={isLoading} forecastData={forecastData} />

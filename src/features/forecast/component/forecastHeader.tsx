@@ -1,21 +1,46 @@
 import { useCallback, useState } from 'react';
-import Select, { GroupBase, NoticeProps, SingleValue, StylesConfig, components } from 'react-select';
+import AsyncSelect from 'react-select/async';
+import { GroupBase, NoticeProps, StylesConfig, components } from 'react-select';
 import isEmpty from 'lodash/isEmpty';
+import httpService from 'shared/services/http.service';
+import { reactSelectStyles, weatherConditionMapper } from 'shared/constants/constant';
 import { SearchIcon } from 'shared/components/icons/icons';
-import { CITY_NAME_LIST, reactSelectStyles, weatherConditionMapper } from 'shared/constants/constant';
 import { IDropDownOptions, IForecast } from '../interface/interface';
 
-const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getWeeklyData, isLoading }) => {
-	const [selectedOption, setSelectedOption] = useState<IDropDownOptions>();
+const ForecastHeader: React.FC<IForecast> = ({
+	weatherData,
+	getWeatherData,
+	getWeeklyData,
+	isLoading,
+	selectedOption,
+	setSelectedOption
+}) => {
+	const API_KEY_VALUE = process.env.REACT_APP_API_SEARCH_KEY;
+
+	const loadOptions = useCallback((cityName: string, callback: (options: IDropDownOptions[]) => void) => {
+		cityName &&
+			httpService
+				.get(`${'https://api.weatherapi.com/v1/search.json'}?key=${API_KEY_VALUE}&q=${cityName}`)
+				.then((data) => {
+					const options = data.map((item: any) => ({
+						value: item.id,
+						label: item.name + ',' + item.country
+					}));
+					callback(options);
+				})
+				.catch((error) => {
+					console.error('Error fetching options:', error);
+					callback([]);
+				});
+	}, []);
 
 	const handleOnChange = useCallback(
-		(selectedOption: SingleValue<IDropDownOptions>) => {
+		(selectedOption: IDropDownOptions | null) => {
 			if (selectedOption) {
-				setSelectedOption(selectedOption);
-				getWeatherData && getWeatherData(selectedOption?.value);
-				getWeeklyData && getWeeklyData(selectedOption?.value);
+				setSelectedOption && setSelectedOption(selectedOption);
+				getWeatherData && getWeatherData(selectedOption?.label.trim());
+				getWeeklyData && getWeeklyData(selectedOption?.label.trim());
 			} else {
-				setSelectedOption(undefined);
 				getWeatherData && getWeatherData('');
 				getWeeklyData && getWeeklyData('');
 			}
@@ -47,14 +72,14 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getW
 					WeatherNow <sup className='font--bold'>Tm</sup>
 				</p>
 				<div className='position--relative search_wrapper'>
-					<Select
+					<AsyncSelect
+						cacheOptions
+						isClearable
+						loadOptions={loadOptions}
+						defaultOptions
 						value={selectedOption}
 						onChange={handleOnChange}
-						options={CITY_NAME_LIST}
 						className='form-field no-padding width--206px cursor-pointer'
-						isSearchable={true}
-						isClearable={true}
-						placeholder={'Search city name'}
 						styles={reactSelectStyles as StylesConfig<IDropDownOptions, false>}
 						components={{ NoOptionsMessage }}
 					/>

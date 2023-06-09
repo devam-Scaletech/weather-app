@@ -14,6 +14,8 @@ export interface IForecast {
 	forecastData?: IForecastChartData[];
 	getWeatherData?: (cityName: string) => void;
 	getWeeklyData?: (cityName: string) => void;
+	setSelectedOption?: (option: IDropDownOptions | null) => void;
+	selectedOption?: IDropDownOptions | null;
 	isLoading?: boolean;
 }
 
