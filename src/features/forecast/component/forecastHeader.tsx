@@ -62,12 +62,12 @@ const ForecastHeader: React.FC<IForecast> = ({ weatherData, getWeatherData, getW
 				</div>
 			</div>
 			{!isEmpty(weatherData) && (
-				<div className='height--full flex align-items--center m--35'>
-					<p className='font-size--128 ml--30 position--relative font--semi-bold'>
+				<div className='height--full flex align-items--center m--35 current_temp_wrapper'>
+					<p className='font-size--128 ml--30 position--relative font--semi-bold current_temp__text'>
 						{Math.trunc(weatherData.main?.temp)}
 						<sup className='font-size--50 position--absolute top--10'>&deg;</sup>
 					</p>
-					<div className='flex flex--column'>
+					<div className='flex flex--column weather_msg_text'>
 						<p className='font-size--30 ml--45 width--full font--semi-bold'>
 							{weatherConditionMapper[weatherData.weather[0]?.main].condition}
 						</p>

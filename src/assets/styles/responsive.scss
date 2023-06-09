@@ -52,7 +52,7 @@
 	.forecast_header__container {
 		.background__weather {
 			width: 100%;
-			height: calc(100vh - 100px) !important;
+			height: calc(100vh - 450px) !important;
 		}
 		.web_name__container {
 			flex-direction: column;
@@ -60,8 +60,27 @@
 				margin-top: 20px;
 			}
 		}
+		.current_temp_wrapper {
+			height: auto;
+			margin: 0px auto;
+			.current_temp__text {
+				font-size: 70px !important;
+				sup {
+					font-size: 30px;
+				}
+			}
+			.weather_msg_text {
+				p {
+					font-size: 25px;
+					width: fit-content;
+				}
+				span {
+					font-size: 15px;
+				}
+			}
+		}
 	}
 	.forecast__widget {
-		height: calc(100vh - 650px) !important;
+		height: calc(100vh - 400px) !important;
 	}
 }
